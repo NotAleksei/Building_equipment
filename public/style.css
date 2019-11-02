@@ -1,0 +1,10 @@
+.page{
+    display: flex;
+    justify-content: space-around;
+}
+
+.right-sidebar{
+    width: 200px;
+    height: 100px;
+    
+}

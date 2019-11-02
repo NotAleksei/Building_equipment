@@ -8,13 +8,6 @@ Scorocode.Init({
 	JavaScriptKey: "5e85f685a23e44e6abad95accc1dd2ea",
 	MasterKey:     "659d718ff9664f6fafbdb79efc93cb34"
 });		
-var buildings = new Scorocode.Query("buildings");
-buildings.find().then((finded) => {
-	let buildings = finded.result;
-	console.info(buildings);
-});
-
-console.log(buildings)
 
 
 
