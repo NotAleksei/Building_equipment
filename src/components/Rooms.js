@@ -9,8 +9,8 @@ class Rooms extends React.Component{
             return (
             <li key={item.id}>
             <a id={item.id}>{item.name}</a>
-            {(item.children) && (<Rooms rooms={item.children}/>)
-            }
+            {(item.children) && (<Rooms rooms={item.children}/>)}
+            <label className={'hidden'}>тут есть</label>
             </li>
             )
         });

@@ -1,15 +1,27 @@
 /* eslint no-undef: "off"*/
 import React from 'react';
+import Buttons from './Buttons';
 
 
 class Equipments extends React.Component{
+    
+
+    
     render(){
         const equipments = this.props.equipments;
         const childrenElemId = this.props.childrenElemId
+        let haveChildren;
+        
+        if(childrenElemId && childrenElemId.length > 0) {
+            haveChildren = false;
+        } else if(childrenElemId){
+            haveChildren = true;
+        }
+        console.log(haveChildren)
 
         //Add equipments into arr from list of rooms id OR Add equipments into arr by id of selected room 
         let equipmentElements = [];
-        if(childrenElemId.length>0){
+        if(childrenElemId && childrenElemId.length>0){
             for(let i = 0; i < childrenElemId.length; i++){
                 equipments.map((item)=>{
                     if(item.room && item.room === childrenElemId[i]){
@@ -28,13 +40,19 @@ class Equipments extends React.Component{
         
         let equipmentElement = equipmentElements.map((item)=>{
             return (
-                    <p>{item}</p>
+                   <div className='equipment'>
+                        <p>{item}</p>
+                        <button>delete</button>
+                    </div>
                 )
         })
 
 
         return(
-            <div className={"right-sidebar"}> {equipmentElement}</div>
+               <div className={"right-sidebar"}>
+                    <Buttons haveChildren = {haveChildren}/>
+                    {equipmentElement}
+               </div>
          )
     }
 }
