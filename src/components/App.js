@@ -9,7 +9,6 @@ class App extends React.Component{
 state = {
   StateBuldings: [],
   StateEquipments: [],
-  // hasEquipMarker: false,
   equipmentRoom: undefined,
   childrenElemId: undefined,
   editEquipment: false,
@@ -28,7 +27,6 @@ componentDidMount(){
     let eq = new Scorocode.Query("equipment");
     eq.find().then((found) => {
       let equipment = found.result;
-      console.log(equipment)
       this.setState({
         StateEquipments: equipment,
       })
@@ -45,27 +43,6 @@ handleClick = (e) =>{
     childrenElemId[i] = childrenLi[i].firstChild.id
   }
   let room = e.target.id;
-  
-  // for(let item of this.state.StateEquipments){
-  //   if(room === item.room){
-  //     this.setState({
-  //       hasEquipMarker: true,
-  //     })
-  //     break
-  //    } else {
-  //     this.setState({
-  //       hasEquipMarker: false,
-  //     })
-      
-  //   }
-  // }
-//   this.state.StateEquipments.map((item)=>{
-    
-// })
-
-  // if(this.state.hasEquipMarker){
-  //   e.target.nextSibling.classList.toggle('hidden')
-  // } 
 
   this.setState({
     childrenElemId: childrenElemId,
@@ -96,11 +73,9 @@ saveEquipment = (e) => {
     
     equip.set("_id", equipmentId).set("name", equipmentName). set("count", equipmentCount);
     equip.save().then(() => {
-      console.info("done")
       let eq = new Scorocode.Query("equipment");
       eq.find().then((found) => {
         let equipment = found.result;
-        console.info(equipment);
         this.setState({
           StateEquipments: equipment,
         })
@@ -127,7 +102,6 @@ saveEquipment = (e) => {
         let eq = new Scorocode.Query("equipment");
         eq.find().then((found) => {
           let equipment = found.result;
-          console.info(equipment);
           this.setState({
             StateEquipments: equipment,
           })
@@ -141,14 +115,13 @@ saveEquipment = (e) => {
 
 editEquipment = (e)=> {
   if (e.target.classList.contains('deleteButton')){
-    console.log(e.target.parentNode.id)
+    
     let equip = new Scorocode.Object("equipment");
-      equip.getById(e.target.parentNode.id).then((item) => {
+      equip.getById(e.target.parentNode.parentNode.id).then((item) => {
       equip.remove(item).then(() => {
         let eq = new Scorocode.Query("equipment");
         eq.find().then((found) => {
           let equipment = found.result;
-          console.info(equipment);
           this.setState({
             StateEquipments: equipment,
           })
@@ -157,14 +130,21 @@ editEquipment = (e)=> {
     });
 
   } else if(e.target.classList.contains('editButton')){
-    let equipmentId = e.target.parentNode.id;
-    console.log(equipmentId)
+    let equipmentId = e.target.parentNode.parentNode.id
     this.setState({
       editEquipment: true,
       equipmentId: equipmentId
     })
+    let sel = `#${e.target.parentNode.parentNode.id}`
+
+    document.querySelector('.equipmentInput-name').value = document.querySelector(sel).firstChild.innerHTML
+    document.querySelector('.equipmentInput-count').value = +document.querySelector(sel).children[1].innerHTML
     document.querySelector('.addEquipment-modal').classList.toggle('addEquipment-modal-active')
 
+  } else if(e.target.classList.contains('addButton')){
+    document.querySelector('.addEquipment-modal').classList.toggle('addEquipment-modal-active')
+    document.querySelector('.equipmentInput-name').value = ''
+    document.querySelector('.equipmentInput-count').value = ''
   }
 
 }
@@ -178,12 +158,13 @@ render(){
       <div className='addEquipment-modal'  onClick={this.saveEquipment}>
         <AddEquipmentModal/>
       </div>
-      <div onClick={this.handleClick}>
+      <div onClick={this.handleClick} className="left-sidebar">
       <Buildings 
         buildings = {this.state.StateBuldings}
       />
       </div>
-      <div onClick = {this.editEquipment}>
+      <div onClick = {this.editEquipment} className="right-sidebar">
+        <h2>Equipments</h2>
         <Equipments 
         equipments = {this.state.StateEquipments} 
         childrenElemId = {this.state.childrenElemId} 

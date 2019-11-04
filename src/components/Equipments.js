@@ -42,22 +42,27 @@ class Equipments extends React.Component{
                 }
             })
         }
-        //
+   
         
         let equipmentElement = equipmentElements.map((item, idx)=>{
             return (
-                   <div className='equipment' key={elementId[idx]} id={elementId[idx]}>
-                        <p>{item}:{count[idx]}</p>
-                        <button className = 'editButton'>edit</button>
-                        <button className = 'deleteButton'>delete</button>
-                    </div>
+                   <tr className='equipment' key={elementId[idx]} id={elementId[idx]}>
+                        <td>{item}</td>
+                        <td>{count[idx]}</td>
+                        <td>
+                            <button className = 'editButton'>edit</button>
+                            <button className = 'deleteButton'>delete</button>
+                        </td>
+                    </tr>
                 )
         })
 
 
         return(
-               <div className={"right-sidebar"}>
-                    {equipmentElement}
+               <div className='equipment-table'>
+                   <table>
+                          {equipmentElements.length > 0 && equipmentElement}
+                    </table>
                     <Buttons haveChildren = {haveChildren}/>
                </div>
          )
