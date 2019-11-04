@@ -180,13 +180,12 @@ tr {
   border-bottom:1px solid #e0e0e0;
 }
 
-table:last-child {
-  border-bottom: none;
+td{
+  width:40%
 }
-
 td:last-child{
+  width: 20%;
   display: flex;
-  justify-content: space-around;
 }
 
 
