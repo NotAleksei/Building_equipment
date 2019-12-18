@@ -1,0 +1,19 @@
+.AddButton{
+    background-color: #72c6eb; 
+    border: none;
+    border-radius: 2px;
+    color: white;
+    padding: 8px 18px;
+    margin: 2px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+  } 
+.AddButton:hover {
+    background-color: #90d3f0; 
+    } /* при наведении курсора мышки */
+.AddButton:active { 
+    background-color:#329dca;
+   } /* при нажатии */
+  

@@ -3,15 +3,19 @@ import React from 'react';
 
 class Rooms extends React.Component{
 
-  
-    render(){
-        const rooms = this.props.rooms;
 
+    render(){
+   
+        const rooms = this.props.rooms;
         const roomsElement = rooms.map((item)=>{
             return (
             <li key={item.id}>
-            <a id={item.id}>{item.name}</a>
-            {(item.children) && (<Rooms rooms={item.children} />)}
+            <a id={item.id}  onClick ={()=>this.props.handleClick(item.id)}>{item.name}</a>
+            {(item.children) && (
+            <Rooms 
+                rooms={item.children} 
+                handleClick ={this.props.handleClick}  
+            />)}
             </li>
             )
         });

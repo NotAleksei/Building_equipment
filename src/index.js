@@ -1,7 +1,7 @@
 /* eslint no-undef: "off"*/
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
+import App from './App';
 
 Scorocode.Init({
 	ApplicationID: "3196b2e873234547ad8b06ed636d3538",
