@@ -2,194 +2,68 @@
 import React from 'react';
 import LeftNavBuildings from './containers/LeftNavBuildings/LeftNavBuildings';
 import EquipmentsArticle from './containers/EquipmentsArticle/EquipmentsArticle';
-import AddEquipmentModal from './components/AddEquipmentModal/AddEquipmentModal'
+import classes from './App.module.css'
+
 
 class App extends React.Component{
 
 state = {
-  id: null,
-  // activeModal: false,
+  currentRoomId: null,
+  equipments: [],
+  equipmentsList: null
 }
 
-// componentDidMount(){
-    
-//     let buildings = new Scorocode.Query("buildings");
-//     buildings.find().then((finded) => {
-//       let buildings = finded.result;
-//       this.setState({
-//         StateBuldings: buildings,
-//       })
-    
-//     let eq = new Scorocode.Query("equipment");
-//     eq.find().then((found) => {
-//       let equipment = found.result;
-//       this.setState({
-//         StateEquipments: equipment,
-//       })
-//     });
 
-//   });
-// };
+handleClick = (currentRoomId) => {
 
-// handleClick = (e) =>{
-//   if (e.target.tagName === 'A'){
-//   let childrenLi = e.target.parentNode.querySelectorAll('li')
-//   let childrenElemId = []
-//   for(let i = 0; i < childrenLi.length; i++){
-//     childrenElemId[i] = childrenLi[i].firstChild.id
-//   }
-//   let room = e.target.id;
+  this.setState({
+    currentRoomId: currentRoomId
+  })
 
-//   this.setState({
-//     childrenElemId: childrenElemId,
-//     equipmentRoom: room,
-//   })
-  
-// }
-// };
+  this.checkEquipments(currentRoomId)
+}
 
+toggleEquipmentsList = (equipments) => {
+  this.setState({
+      equipments: equipments
+  })
+  this.checkEquipments(this.state.currentRoomId)
+}
 
-// cancelModal = () => {
-//     document.querySelector('.addEquipment-modal-active').classList.toggle('addEquipment-modal-active')
-//     this.setState({
-//       editEquipment: false,
-//     })
-// };
+checkEquipments = (roomId) => {
+  let currentEquipments = this.state.equipments
 
-// saveEquipment = (e) => {
-//   if(e.target.classList.contains('saveButton') && this.state.editEquipment){
-    
-//     let equipmentName = document.querySelector('.equipmentInput-name').value;
-//     let equipmentCount = +document.querySelector('.equipmentInput-count').value;
-//     let equipmentId = this.state.equipmentId;
-
-//     this.cancelModal();
-//     //edit new equipment and rerender <Equipments/>
-//     let equip = new Scorocode.Object("equipment");
-    
-//     equip.set("_id", equipmentId).set("name", equipmentName). set("count", equipmentCount);
-//     equip.save().then(() => {
-//       let eq = new Scorocode.Query("equipment");
-//       eq.find().then((found) => {
-//         let equipment = found.result;
-//         this.setState({
-//           StateEquipments: equipment,
-//         })
-//       });
-//     });
-    
-
-// } else if(e.target.classList.contains('saveButton')){
-  
-//     let equipmentName = document.querySelector('.equipmentInput-name').value;
-//     let equipmentCount = +document.querySelector('.equipmentInput-count').value;
-//     let roomId = this.state.equipmentRoom;
-      
-//     this.cancelModal();
-   
-//     //add new equipment and rerender <Equipments/>
-//     let comp = new Scorocode.Object("equipment");
-//     comp.set("name", equipmentName);
-//     comp.set("room", roomId); // значение поля id комнаты
-//     comp.set("count", equipmentCount);
-//     comp.save().then(() => {
-        
-    
-//         let eq = new Scorocode.Query("equipment");
-//         eq.find().then((found) => {
-//           let equipment = found.result;
-//           this.setState({
-//             StateEquipments: equipment,
-//           })
-//         });
-//     });
-// } else if(e.target.classList.contains('cancelButton')){
-//   this.cancelModal();
-// }
-// };
-
-
-// editEquipment = (e)=> {
-//   if (e.target.classList.contains('deleteButton')){
-    
-//     let equip = new Scorocode.Object("equipment");
-//       equip.getById(e.target.parentNode.parentNode.id).then((item) => {
-//       equip.remove(item).then(() => {
-//         let eq = new Scorocode.Query("equipment");
-//         eq.find().then((found) => {
-//           let equipment = found.result;
-//           this.setState({
-//             StateEquipments: equipment,
-//           })
-//         });
-//       });
-//     });
-
-//   } else if(e.target.classList.contains('editButton')){
-//     let equipmentId = e.target.parentNode.parentNode.id
-//     this.setState({
-//       editEquipment: true,
-//       equipmentId: equipmentId
-//     })
-//     let sel = `#${e.target.parentNode.parentNode.id}`
-
-//     document.querySelector('.equipmentInput-name').value = document.querySelector(sel).firstChild.innerHTML
-//     document.querySelector('.equipmentInput-count').value = +document.querySelector(sel).children[1].innerHTML
-//     document.querySelector('.addEquipment-modal').classList.toggle('addEquipment-modal-active')
-
-//   } else if(e.target.classList.contains('addButton')){
-//     document.querySelector('.addEquipment-modal').classList.toggle('addEquipment-modal-active')
-//     document.querySelector('.equipmentInput-name').value = ''
-//     document.querySelector('.equipmentInput-count').value = ''
-//   }
-
-// }
-
-handleClick = (id) => {
-  if(id === 'FG7pRodZNF'){
-    this.setState({
-      id: 'b1'
-    })
-  } else if (id === 'CacR5AWhfr'){
-    this.setState({
-      id: 'b2'
-    })
-  } else {
-    this.setState({
-      id: id
-    })
+  for(let i = 0; i < currentEquipments.length; i++){
+    if(roomId === 'FG7pRodZNF'){
+      roomId = 'b1'
+    } else if (roomId=== 'CacR5AWhfr'){
+      roomId = 'b2'
+    }
+    if(currentEquipments[i].room && !currentEquipments[i].room.indexOf(roomId)){
+      this.setState({
+        equipmentsList: 'full'
+      })
+      break
+    } else {
+      this.setState({
+        equipmentsList: 'empty'
+      })
+    }
   }
-  console.log(id)
 }
-
-// showModal = () => {
-//   this.setState({
-//     activeModal: !this.state.activeModal
-//   })
-// }
-
 
 render(){
   return(
-    <div className='page'>
-      {/* <div className='addEquipment-modal'  onClick={this.saveEquipment}>
-        <AddEquipmentModal/>
-      </div> */}
-      {/* {this.state.activeModal ? <AddEquipmentModal id = {this.state.id} showModal = {this.showModal}/> : null} */}
-      {/* <div onClick={this.handleClick} className="left-sidebar">
-      <Buildings 
-        buildings = {this.state.StateBuldings}
+    <div className={classes.page}>
+      <LeftNavBuildings 
+        currentRoomId = {this.state.currentRoomId} 
+        click = {this.handleClick}
+        equipmentsList = {this.state.equipmentsList}
       />
-      </div> */}
-      <LeftNavBuildings click = {this.handleClick}/>
-      <EquipmentsArticle id = {this.state.id} showModal = {this.showModal}/>
-      {/* <div onClick = {this.editEquipment} className="right-sidebar">
-        <h2>Equipments</h2>
-        <Equipments 
-        equipments = {this.state.StateEquipments} 
-        childrenElemId = {this.state.childrenElemId} 
-        equipmentRoom={this.state.equipmentRoom}/>
-      </div> */}
+      <EquipmentsArticle 
+        currentRoomId = {this.state.currentRoomId}
+        toggleEquipmentsList = {this.toggleEquipmentsList}
+      />
     </div>
     
   )

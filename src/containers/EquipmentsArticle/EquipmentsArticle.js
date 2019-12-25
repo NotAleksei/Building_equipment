@@ -4,6 +4,7 @@ import EditButton from '../../components/UI/EditButton/EditButton';
 import DeleteButton from '../../components/UI/DeleteButton/DeleteButton';
 import AddButton from '../../components/UI/AddButton/AddButton';
 import AddEquipmentModal from '../../components/AddEquipmentModal/AddEquipmentModal'
+import EditEquipmentModal from '../../components/EditEquipmentModal/EditEquipmentModal'
 import CleanAll from '../../components/UI/CleanAll/CleanAll'
 
 
@@ -11,7 +12,9 @@ class EquipmentsArticle extends React.Component{
     
     state ={
         equipments: [],
-        activeModal: false,
+        activeAddModal: false,
+        activeEditModal: false,
+        currentItem: {},
     }
     
 componentDidMount(){
@@ -21,11 +24,9 @@ componentDidMount(){
       this.setState({
         equipments: newEquipments,
       })
+      this.props.toggleEquipmentsList(newEquipments)
     });
-    
-}
-componentDidUpdate(){
-  console.log('отрендерил новый список компонентов', this.state.equipments)
+  
 }
 
 reloadEquipment = () => {
@@ -35,45 +36,67 @@ reloadEquipment = () => {
       this.setState({
         equipments: newEquipments,
       })
+      this.props.toggleEquipmentsList(newEquipments)
     });
-    console.log('упс, я перезагрузился')
 }
 
-showModal = () => {
+showAddModal = () => {
   this.setState({
-    activeModal: !this.state.activeModal
+    activeAddModal: !this.state.activeAddModal
   })
 }
+
+
+showEditModal = (id, name, count) => {
+  this.setState({
+    activeEditModal: !this.state.activeEditModal,
+    currentItem: {id, name, count}
+  })
+}
+
     render(){
 
         let equipmentElement = this.state.equipments.map((item)=>{
-            if(item.room && !item.room.indexOf(this.props.id)){
+          let currentRoomId = this.props.currentRoomId
+          if(this.props.currentRoomId === 'FG7pRodZNF'){
+            currentRoomId = 'b1'
+          } else if (this.props.currentRoomId === 'CacR5AWhfr'){
+            currentRoomId = 'b2'
+          }
+          if(item.room && !item.room.indexOf(currentRoomId)){
             return (
-                   <tr className='equipment' key={item._id} id={item._id}>
-                        <td>{item.name}</td>
-                        <td>{item.count}</td>
-                        <td>
-                            <EditButton id={item._id} reloadEquipment = {this.reloadEquipment}/>
-                            <DeleteButton id={item._id} reloadEquipment = {this.reloadEquipment}/>
-                        </td>
-                    </tr>
-                )}
+                  <tr className='equipment' key={item._id} id={item._id}>
+                      <td>{item.name}</td>
+                      <td>{item.count}</td>
+                      <td>
+                          <EditButton id={item._id} showEditModal={this.showEditModal} currentItem={{id:item._id, name:item.name, count:item.count}}/>
+                          <DeleteButton id={item._id} reloadEquipment = {this.reloadEquipment}/>
+                      </td>
+                  </tr>
+          )}
         })
-        
 
+        
         return(
                <div className='equipment-table'>
-                    {this.state.activeModal ? <AddEquipmentModal 
-                    id = {this.props.id}
-                     showModal = {this.showModal}
-                     reloadEquipment ={this.reloadEquipment}
+                    {this.state.activeAddModal ? <AddEquipmentModal 
+                      roomId = {this.props.currentRoomId}
+                      showAddModal = {this.showAddModal}
+                      reloadEquipment = {this.reloadEquipment}
                      /> : null}
+                    {this.state.activeEditModal ? <EditEquipmentModal 
+                      showEditModal = {this.showEditModal}
+                      reloadEquipment ={this.reloadEquipment}
+                      currentItem = {this.state.currentItem}
+                     /> : null}
+
                     <table>
                           {equipmentElement}
                     </table>
-                    {this.props.id && this.props.id.indexOf('room') > 0 ? <AddButton 
-                    roomId = {this.props.id} 
-                    showModal={this.showModal}
+
+                    {this.props.currentRoomId && this.props.currentRoomId.indexOf('room') > 0 ? <AddButton 
+                      roomId = {this.props.currentRoomId} 
+                      showAddModal={this.showAddModal}
                     /> : null}
                     <CleanAll equipments={this.state.equipments}/>
                </div>

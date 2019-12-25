@@ -1,31 +1,21 @@
-.LeftNav{
-    /* position: fixed; */
-    /* top: 0;
-    bottom: 0; */
-    background-color: #2e3335;
-    width: 30%;
-    padding-top: 5vh;
-
-}
-
-.LeftNav .list{
+.list{
     list-style-type: none;
     list-style-position: inside;
     padding: 0 25px;
 }
 
-.LeftNav .list li::before {
+.list li::before {
     content: "\2022";  
     color: white; 
     display: inline-block; 
     width: 1em; 
     margin-left: -1em; 
   }
-.LeftNav .list li {
+.list li {
     padding: 8px 0;
     text-decoration: none;
     color: white;
   }
-  .LeftNav .list a {
+.list a {
     cursor: pointer;
   }

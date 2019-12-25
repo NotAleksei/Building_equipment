@@ -1,14 +1,16 @@
 /* eslint no-undef: "off"*/
 import React from 'react';
-import Rooms from '../../components/Rooms';
+import Rooms from '../../components/Rooms/Rooms';
+import Indicator from '../../components/UI/Indicator/Indicator'
 import classes from './LeftNavBuildings.module.css'
 
 class LeftNavBuildings extends React.Component{
 
     state = {
         buildings: [],
-        equipments: []
     }
+
+
 
     componentDidMount(){
         let buildings = new Scorocode.Query("buildings");
@@ -17,24 +19,26 @@ class LeftNavBuildings extends React.Component{
             this.setState({
                 buildings: newBuildings,
             })
+            console.log(newBuildings)
         });
-        let eq = new Scorocode.Query("equipment");
-        eq.find().then((found) => {
-          let newEquipments = found.result;
-          this.setState({
-            equipments: newEquipments,
-          })
-        });   
     }       
 
+
+
     render(){
-        console.log(this.state.buildings)
+
         const buildings = this.state.buildings;
         const buildingsElement = buildings.map((item)=>{
             return (
             <li key={item._id}>
                 <a id={item._id}  onClick ={()=>this.props.click(item._id)}>{item.name}</a>
-                <Rooms rooms={item.rooms} handleClick ={this.props.click}/>
+                {this.props.currentRoomId == item._id ? <Indicator equipmentsList = {this.props.equipmentsList}/> : null}
+                <Rooms 
+                    rooms={item.rooms}
+                    handleClick ={this.props.click}
+                    currentRoomId = {this.props.currentRoomId}
+                    equipmentsList = {this.props.equipmentsList}
+                />
             </li>
             )
         })
@@ -42,7 +46,7 @@ class LeftNavBuildings extends React.Component{
             <div className={classes.LeftNav}>
                 <ul className={classes.list}>
                     {this.state.buildings ? buildingsElement : null}
-                </ul>
+                </ul> 
             </div>
          )
     }

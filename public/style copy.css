@@ -1,0 +1,191 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+.hidden{
+  display: none;
+}
+
+/* button*/
+button{
+  background-color: #72c6eb; 
+  border: none;
+  border-radius: 2px;
+  color: white;
+  padding: 8px 18px;
+  margin: 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+} 
+button:hover {
+  background-color: #90d3f0; 
+  } /* при наведении курсора мышки */
+button:active { 
+  background-color:#329dca;
+ } /* при нажатии */
+
+
+
+/* input */
+input{
+  border: 1px solid #ccc;
+  border-radius: 1px;
+  padding: 10px;
+  margin: 0.5vh;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+input[type='number'] {
+    -moz-appearance: textfield;
+}
+
+
+
+
+/* Page style */
+#root{
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.page{
+    font-family: 'Source Sans Pro', sans-serif;
+    height: 100%;
+    display: flex;
+    background-color: #f1f8f9;
+}
+
+.left-sidebar{
+  background: #2e3335;
+  width: 30%;
+  padding-top: 5vh;
+ 
+}
+
+.right-sidebar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    overflow-y: auto;
+}
+
+
+/* Modal window */
+.addEquipment-modal{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1050;
+    opacity: 0; /* по умолчанию модальное окно прозрачно */
+    pointer-events: none; /* элемент невидим для событий мыши */
+}
+
+.addEquipment-modal-active{
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1050;
+
+    opacity: 1;
+    pointer-events: auto;
+    overflow-y: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.editEquipment{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 20%;
+    height: 20vh;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.modalButton{
+  margin-top: 1vh;
+  width: 70%;
+  display: flex;
+  justify-content: space-around;
+ }
+
+
+
+
+/* list style */
+
+.category-list {
+  list-style-type: none;
+  list-style-position: inside;
+  padding: 0 25px;
+}
+.category-list li::before {
+  content: "\2022";  
+  color: white; 
+  display: inline-block; 
+  width: 1em; 
+  margin-left: -1em; 
+}
+.category-list li {
+  font-family: 'Source Sans Pro', sans-serif;
+  padding: 8px 0;
+  text-decoration: none;
+  color: white;
+}
+.category-list a {
+  cursor: pointer;
+}
+
+
+/* table style */
+table:empty{
+  display: none;
+}
+
+.equipment-table{
+  width: 40%;
+}
+
+table {
+  font-family: 'Source Sans Pro', sans-serif;
+  border:1px solid #d3d3d3;
+  background:#fefefe;
+  width:100%;
+  margin:5% auto 1vh;
+  border-radius:5px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  border-collapse: collapse;
+}
+
+tr {
+  padding:5px 10px 5px; 
+  text-align:center; 
+  border-bottom:1px solid #e0e0e0;
+}
+
+td{
+  width:40%
+}
+td:last-child{
+  width: 20%;
+  display: flex;
+}
+
+

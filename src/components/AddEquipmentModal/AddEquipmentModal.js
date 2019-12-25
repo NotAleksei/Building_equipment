@@ -25,15 +25,15 @@ class AddEquipmentModal extends React.Component{
     addEquipment = () => {
         let comp = new Scorocode.Object("equipment");
         comp.set("name", this.state.equipmentName);
-        comp.set("room", this.props.id); 
+        comp.set("room", this.props.roomId); 
         comp.set("count", +this.state.count);
         comp.save().then(() => {
             console.info("Done");
             this.props.reloadEquipment()
         });
-        console.log(`добваили ${this.state.equipmentName} в количестве ${this.state.count} в команту ${this.props.id}`)
+        console.log(`добваили ${this.state.equipmentName} в количестве ${this.state.count} в команту ${this.props.roomId}`)
 
-        this.props.showModal()
+        this.props.showAddModal()
     }
       
     render(){
@@ -45,7 +45,7 @@ class AddEquipmentModal extends React.Component{
                 <input placeholder='count' value={this.state.count} onChange={this.handleChangeCount} type='number'></input>
                 <div className='modalButton'>
                     <button className ='saveButton' onClick={this.addEquipment}>save</button>
-                    <button className='cancelButton'>cancel</button>
+                    <button className='cancelButton' onClick={this.props.showAddModal}>cancel</button>
                 </div>
             </form>
            </div> 
