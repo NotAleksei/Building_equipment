@@ -1,17 +1,19 @@
 .LeftNav{
-    /* position: fixed; */
-    /* top: 0;
-    bottom: 0; */
-    background-color: #2e3335;
     width: 30%;
-    padding-top: 5vh;
-
+    height: 100%;
+    background-color: #2e3335;
 }
+.LeftNav div{
+    background-color: #2e3335;
+    padding-top: 5vh;
+    font-size: 1vw;
+}
+
 
 .LeftNav .list{
     list-style-type: none;
     list-style-position: inside;
-    padding: 0 25px;
+    padding: 0 2vh;
 }
 
 .LeftNav .list li::before {
@@ -22,7 +24,7 @@
     margin-left: -1em; 
   }
 .LeftNav .list li {
-    padding: 8px 0;
+    padding: 0.7vh 0;
     text-decoration: none;
     color: white;
   }

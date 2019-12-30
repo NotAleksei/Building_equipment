@@ -2,10 +2,10 @@
     display: flex;
     position: fixed;
     top: 0;
-    left: 0;
     bottom: 0;
+    left: 0;
     right: 0;
-    overflow-y: auto;
+    overflow: auto;
     font-family: 'Source Sans Pro', sans-serif;
     background-color: #f1f8f9;
 }
