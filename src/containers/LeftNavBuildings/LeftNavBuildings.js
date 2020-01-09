@@ -44,11 +44,9 @@ class LeftNavBuildings extends React.Component{
         })
         return(
             <div className={classes.LeftNav}>
-                <div>
                     <ul className={classes.list}>
                         {this.state.buildings ? buildingsElement : null}
                     </ul>
-                </div> 
             </div>
          )
     }

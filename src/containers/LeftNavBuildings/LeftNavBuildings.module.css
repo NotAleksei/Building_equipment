@@ -2,13 +2,8 @@
     width: 30%;
     height: 100%;
     background-color: #2e3335;
+    overflow-y: auto;
 }
-.LeftNav div{
-    background-color: #2e3335;
-    padding-top: 5vh;
-    font-size: 1vw;
-}
-
 
 .LeftNav .list{
     list-style-type: none;
