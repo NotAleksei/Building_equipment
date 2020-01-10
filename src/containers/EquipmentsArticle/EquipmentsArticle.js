@@ -6,6 +6,7 @@ import AddButton from '../../components/UI/AddButton/AddButton';
 import AddEquipmentModal from '../../components/AddEquipmentModal/AddEquipmentModal'
 import EditEquipmentModal from '../../components/EditEquipmentModal/EditEquipmentModal'
 import CleanAll from '../../components/UI/CleanAll/CleanAll'
+import classes from './EquipmentsArticle.module.css'
 
 
 class EquipmentsArticle extends React.Component{
@@ -66,10 +67,12 @@ showEditModal = (id, name, count) => {
           if(item.room && !item.room.indexOf(currentRoomId)){
             return (
                   <tr className='equipment' key={item._id} id={item._id}>
-                      <td>{item.name}</td>
-                      <td>{item.count}</td>
-                      <td>
+                      <td className={classes.equipmentsName}  valign='center'>{item.name}</td>
+                      <td className={classes.equipmentsCount}  valign='center'>{item.count}</td>
+                      <td className={classes.equipmentsButton} align='center' valign='center'>
                           <EditButton id={item._id} showEditModal={this.showEditModal} currentItem={{id:item._id, name:item.name, count:item.count}}/>
+                      </td>
+                      <td className={classes.equipmentsButton} align='center' valign='center'>
                           <DeleteButton id={item._id} reloadEquipment = {this.reloadEquipment}/>
                       </td>
                   </tr>
@@ -78,7 +81,7 @@ showEditModal = (id, name, count) => {
 
         
         return(
-               <div className='equipment-table'>
+               <div className={classes.EquipmentsArticle}>
                     {this.state.activeAddModal ? <AddEquipmentModal 
                       roomId = {this.props.currentRoomId}
                       showAddModal = {this.showAddModal}
@@ -90,7 +93,7 @@ showEditModal = (id, name, count) => {
                       currentItem = {this.state.currentItem}
                      /> : null}
 
-                    <table>
+                    <table className={classes.equipmentsTable}>
                           {equipmentElement}
                     </table>
 

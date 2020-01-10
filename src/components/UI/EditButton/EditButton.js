@@ -1,4 +1,5 @@
 import React from 'react'
+import editPng from '../../../img/edit.png'
 import classes from './EditButton.module.css'
 
 
@@ -11,7 +12,7 @@ const EditButton = props  => {
     return(
         <button className = {classes.EditButton}
             onClick = {()=>props.showEditModal(currentItem.id, currentItem.name, currentItem.count)}
-            >edit
+            ><img src={editPng} alt=''></img>
         </button>
     )
 }

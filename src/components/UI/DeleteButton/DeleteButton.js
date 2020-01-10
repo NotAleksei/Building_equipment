@@ -1,5 +1,6 @@
 /* eslint no-undef: "off"*/
 import React from 'react'
+import deletePng from '../../../img/delete.png'
 import classes from './DeleteButton.module.css'
 
 
@@ -17,7 +18,9 @@ const DeleteButton = props  => {
     }
 
     return(
-        <button className = {classes.DeleteButton} onClick = {deleteEquipment}>delete</button>
+        <button className = {classes.DeleteButton} onClick = {deleteEquipment}>
+            <img src={deletePng} alt=''></img>
+        </button>
     )
 }
 

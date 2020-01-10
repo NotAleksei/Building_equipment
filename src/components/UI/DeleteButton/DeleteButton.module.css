@@ -1,19 +1,18 @@
-.DeleteButton{
-    background-color: #72c6eb; 
-    border: none;
-    border-radius: 2px;
-    color: white;
-    padding: 8px 18px;
-    margin: 2px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-  } 
+.DeleteButton {
+  background: transparent;
+  border: 0;
+  vertical-align: middle;
+} 
+.DeleteButton:focus {
+  outline: none;
+}
 .DeleteButton:hover {
-    background-color: #90d3f0; 
-    } /* при наведении курсора мышки */
-.DeleteButton:active { 
-    background-color:#329dca;
-   } /* при нажатии */
-  
+  cursor: pointer;
+}
+
+.DeleteButton img {
+  height: 20px;
+  width: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
