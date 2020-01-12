@@ -10,9 +10,10 @@ const EditButton = props  => {
     const currentItem = props.currentItem;
 
     return(
-        <button className = {classes.EditButton}
+        <button 
+            className = {classes.EditButton}
             onClick = {()=>props.showEditModal(currentItem.id, currentItem.name, currentItem.count)}
-            ><img src={editPng} alt=''></img>
+            ><img src={editPng} alt='' title="редактировать"></img>
         </button>
     )
 }

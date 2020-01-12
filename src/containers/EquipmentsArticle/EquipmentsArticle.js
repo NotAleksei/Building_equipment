@@ -67,8 +67,8 @@ showEditModal = (id, name, count) => {
           if(item.room && !item.room.indexOf(currentRoomId)){
             return (
                   <tr className='equipment' key={item._id} id={item._id}>
-                      <td className={classes.equipmentsName}  valign='center'>{item.name}</td>
-                      <td className={classes.equipmentsCount}  valign='center'>{item.count}</td>
+                      <td className={classes.equipmentsName}  valign='center'><p className={classes.nameWrap}>{item.name}</p></td>
+                      <td className={classes.equipmentsCount}  valign='center'><p className={classes.nameWrap}>{item.count}</p></td>
                       <td className={classes.equipmentsButton} align='center' valign='center'>
                           <EditButton id={item._id} showEditModal={this.showEditModal} currentItem={{id:item._id, name:item.name, count:item.count}}/>
                       </td>

@@ -19,7 +19,7 @@ const DeleteButton = props  => {
 
     return(
         <button className = {classes.DeleteButton} onClick = {deleteEquipment}>
-            <img src={deletePng} alt=''></img>
+            <img src={deletePng} alt='' title="удалить"></img>
         </button>
     )
 }
