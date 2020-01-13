@@ -1,19 +1,28 @@
 .AddButton{
+    position: absolute;
+    left:30%;
+    top:0;
     background-color: #72c6eb; 
     border: none;
-    border-radius: 2px;
+    border-radius: 0px 5px 5px 0px;
+    box-shadow:3px 0px 4px rgb(211, 210, 210);
     color: white;
-    padding: 8px 18px;
-    margin: 2px;
-    text-align: center;
-    text-decoration: none;
+    padding: 60px 18px;
     display: inline-block;
-    font-size: 14px;
   } 
 .AddButton:hover {
     background-color: #90d3f0; 
-    } /* при наведении курсора мышки */
+    } 
 .AddButton:active { 
     background-color:#329dca;
-   } /* при нажатии */
-  
+   }
+.AddButton:focus {
+    outline: none;
+}
+.AddButton p{
+  font-family: 'Source Sans Pro', sans-serif;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px;
+  writing-mode: vertical-rl;
+}

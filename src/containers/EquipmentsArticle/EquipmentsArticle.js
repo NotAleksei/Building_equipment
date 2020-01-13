@@ -101,7 +101,7 @@ showEditModal = (id, name, count) => {
                       roomId = {this.props.currentRoomId} 
                       showAddModal={this.showAddModal}
                     /> : null}
-                    <CleanAll equipments={this.state.equipments}/>
+                    {/* <CleanAll equipments={this.state.equipments}/> */}
                </div>
          )
     }
