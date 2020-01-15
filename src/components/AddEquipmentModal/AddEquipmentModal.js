@@ -8,6 +8,7 @@ class AddEquipmentModal extends React.Component{
     state={
         equipmentName: '',
         count: '',
+        validation: true,
     }
 
 
@@ -22,18 +23,31 @@ class AddEquipmentModal extends React.Component{
         });
     }
 
-    addEquipment = () => {
-        let comp = new Scorocode.Object("equipment");
-        comp.set("name", this.state.equipmentName);
-        comp.set("room", this.props.roomId); 
-        comp.set("count", +this.state.count);
-        comp.save().then(() => {
-            console.info("Done");
-            this.props.reloadEquipment()
-        });
-        console.log(`добваили ${this.state.equipmentName} в количестве ${this.state.count} в команту ${this.props.roomId}`)
 
-        this.props.showAddModal()
+    addEquipment = (event) => {
+        event.preventDefault();
+        let equipmentName = this.state.equipmentName;
+        if(equipmentName.trim() != '') {
+            let comp = new Scorocode.Object("equipment");
+            comp.set("name", this.state.equipmentName);
+            comp.set("room", this.props.roomId); 
+            comp.set("count", +this.state.count);
+            comp.save().then(() => {
+                console.info("Done");
+                this.props.reloadEquipment()
+            });
+            this.setState({
+                validation: true,
+            })
+            console.log(`добваили ${this.state.equipmentName} в количестве ${this.state.count} в команту ${this.props.roomId}`)
+
+            this.props.showAddModal()
+        } else {
+            console.log('пустое поле')
+            this.setState({
+                validation: false,
+            })
+        }
     }
       
     render(){
@@ -41,11 +55,12 @@ class AddEquipmentModal extends React.Component{
         return(
            <div className={classes.AddEquipmentModal}>
             <form className={classes.modalWindow}> 
-                <input placeholder='equipment name' value={this.state.equipmentName} onChange={this.handleChangeName}></input>
-                <input placeholder='count' value={this.state.count} onChange={this.handleChangeCount} type='number'></input>
-                <div className='modalButton'>
-                    <button className ='saveButton' onClick={this.addEquipment}>save</button>
-                    <button className='cancelButton' onClick={this.props.showAddModal}>cancel</button>
+                <h1>добавить новое оборудование</h1>
+                <input className={this.state.validation ? classes.inputName : classes.wrongName} placeholder='наименование оборудования' value={this.state.equipmentName} onChange={this.handleChangeName}></input>
+                <input className={classes.inputCount}placeholder='колличество' value={this.state.count} onChange={this.handleChangeCount} type='number'></input>
+                <div className={classes.modalButton}>
+                    <button className ={classes.button} onClick={this.addEquipment}>сохранить</button>
+                    <button className={classes.button} onClick={this.props.showAddModal}>отмена</button>
                 </div>
             </form>
            </div> 

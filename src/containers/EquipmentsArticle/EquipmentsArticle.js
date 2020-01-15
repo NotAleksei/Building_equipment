@@ -82,11 +82,13 @@ showEditModal = (id, name, count) => {
         
         return(
                <div className={classes.EquipmentsArticle}>
-                    {this.state.activeAddModal ? <AddEquipmentModal 
+                    {this.state.activeAddModal ? 
+                    <AddEquipmentModal 
                       roomId = {this.props.currentRoomId}
                       showAddModal = {this.showAddModal}
                       reloadEquipment = {this.reloadEquipment}
-                     /> : null}
+                     /> 
+                     : null}
                     {this.state.activeEditModal ? <EditEquipmentModal 
                       showEditModal = {this.showEditModal}
                       reloadEquipment ={this.reloadEquipment}
