@@ -78,7 +78,6 @@ showEditModal = (id, name, count) => {
                   </tr>
           )}
         })
-
         
         return(
                <div className={classes.EquipmentsArticle}>
@@ -95,9 +94,14 @@ showEditModal = (id, name, count) => {
                       currentItem = {this.state.currentItem}
                      /> : null}
 
+                    {equipmentElement.some((elem)=> typeof elem != "undefined") ?
                     <table className={classes.equipmentsTable}>
+                          <th>наименование</th>
+                          <th>количество</th>
+                          <th></th>
+                          <th></th>
                           {equipmentElement}
-                    </table>
+                    </table>: null}
 
                     {this.props.currentRoomId && this.props.currentRoomId.indexOf('room') > 0 ? <AddButton 
                       roomId = {this.props.currentRoomId} 

@@ -7,15 +7,18 @@
     border-radius: 0px 5px 5px 0px;
     box-shadow:3px 0px 4px rgb(211, 210, 210);
     color: white;
-    padding: 60px 18px;
+    padding: 60px 16px;
     display: inline-block;
+    transition: all 0.3s ease-in-out
   } 
 .AddButton:hover {
     background-color: #90d3f0; 
-    } 
+    padding: 60px 23px;
+    transition: all 0.3s ease-in-out
+} 
 .AddButton:active { 
     background-color:#329dca;
-   }
+}
 .AddButton:focus {
     outline: none;
 }

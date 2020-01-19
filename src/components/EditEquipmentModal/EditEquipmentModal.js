@@ -9,6 +9,7 @@ class EditEquipmentModal extends React.Component{
         id: this.props.currentItem.id,
         equipmentName: this.props.currentItem.name,
         count: this.props.currentItem.count,
+        validation: true,
     }
 
 
@@ -23,17 +24,23 @@ class EditEquipmentModal extends React.Component{
         });
     }
 
-    editEquipment = () => {
-        let equip = new Scorocode.Object("equipment");
-        equip.set("_id", this.state.id).set("name", this.state.name). set("count", +this.state.count);
-        equip.save().then(() => {
-            console.info("done")
-            this.props.reloadEquipment()
-        });
-        console.log(`добваили ${this.state.equipmentName} в количестве ${this.state.count} с айди ${this.state.id}`)
-        
-
-        this.props.showEditModal()
+    editEquipment = (event) => {
+        event.preventDefault();
+        let equipmentName = this.state.equipmentName;
+        if(equipmentName.trim() != ''){
+            let equip = new Scorocode.Object("equipment");
+            equip.set("_id", this.state.id).set("name", this.state.name). set("count", +this.state.count);
+            equip.save().then(() => {
+                console.info("done")
+                this.props.reloadEquipment()
+            });
+            console.log(`добваили ${this.state.equipmentName} в количестве ${this.state.count} с айди ${this.state.id}`)
+            this.props.showEditModal()
+        } else {
+            this.setState({
+                validation: false,
+            })
+        }
     }
       
     render(){
@@ -41,11 +48,12 @@ class EditEquipmentModal extends React.Component{
         return(
            <div className={classes.AddEquipmentModal}>
             <form className={classes.modalWindow}> 
-                <input placeholder='equipment name' value={this.state.equipmentName} onChange={this.handleChangeName}></input>
-                <input placeholder='count' value={this.state.count} onChange={this.handleChangeCount} type='number'></input>
-                <div className='modalButton'>
-                    <button className ='saveButton' onClick={this.editEquipment}>save</button>
-                    <button className='cancelButton' onClick={this.props.showEditModal}>cancel</button>
+                <h1>редактировать оборудование</h1>
+                <input className={this.state.validation ? classes.inputName : classes.wrongName} placeholder='equipment name' value={this.state.equipmentName} onChange={this.handleChangeName}></input>
+                <input className={classes.inputCount} placeholder='count' value={this.state.count} onChange={this.handleChangeCount} type='number'></input>
+                <div className={classes.modalButton}>
+                    <button className ={classes.button} onClick={this.editEquipment}>save</button>
+                    <button className ={classes.button} onClick={this.props.showEditModal}>cancel</button>
                 </div>
             </form>
            </div> 
