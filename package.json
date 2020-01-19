@@ -2,7 +2,7 @@
   "name": "docsvision",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://NotAleksei.github.io/equipments/",
+  "homepage": "https://NotAleksei.github.io/equipments/",
   "dependencies": {
     "gh-pages": "^2.2.0",
     "react": "^16.11.0",
