@@ -56,7 +56,7 @@ class AddEquipmentModal extends React.Component{
             <form className={classes.modalWindow}> 
                 <h1>добавить новое оборудование</h1>
                 <input className={this.state.validation ? classes.inputName : classes.wrongName} placeholder='наименование оборудования' value={this.state.equipmentName} onChange={this.handleChangeName}></input>
-                <input className={classes.inputCount} placeholder='колличество' value={this.state.count} onChange={this.handleChangeCount} type='number'></input>
+                <input className={classes.inputCount} placeholder='количество' value={this.state.count} onChange={this.handleChangeCount} type='number'></input>
                 <div className={classes.modalButton}>
                     <button className ={classes.button} onClick={this.addEquipment}>сохранить</button>
                     <button className={classes.button} onClick={this.props.showAddModal}>отмена</button>
