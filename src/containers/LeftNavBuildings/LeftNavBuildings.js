@@ -19,7 +19,6 @@ class LeftNavBuildings extends React.Component{
             this.setState({
                 buildings: newBuildings,
             })
-            console.log(newBuildings)
         });
     }       
 

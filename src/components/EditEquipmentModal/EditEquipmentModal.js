@@ -34,7 +34,6 @@ class EditEquipmentModal extends React.Component{
                 console.info("done")
                 this.props.reloadEquipment()
             });
-            console.log(`добваили ${this.state.equipmentName} в количестве ${this.state.count} с айди ${this.state.id}`)
             this.props.showEditModal()
         } else {
             this.setState({
@@ -52,8 +51,8 @@ class EditEquipmentModal extends React.Component{
                 <input className={this.state.validation ? classes.inputName : classes.wrongName} placeholder='наименование оборудования' value={this.state.equipmentName} onChange={this.handleChangeName}></input>
                 <input className={classes.inputCount} placeholder='количество' value={this.state.count} onChange={this.handleChangeCount} type='number'></input>
                 <div className={classes.modalButton}>
-                    <button className ={classes.button} onClick={this.editEquipment}>save</button>
-                    <button className ={classes.button} onClick={this.props.showEditModal}>cancel</button>
+                    <button className ={classes.button} onClick={this.editEquipment}>сохранить</button>
+                    <button className ={classes.button} onClick={this.props.showEditModal}>отмена</button>
                 </div>
             </form>
            </div> 

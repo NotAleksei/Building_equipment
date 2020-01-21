@@ -39,8 +39,6 @@ class AddEquipmentModal extends React.Component{
             this.setState({
                 validation: true,
             })
-            console.log(`добваили ${this.state.equipmentName} в количестве ${this.state.count} в команту ${this.props.roomId}`)
-
             this.props.showAddModal()
         } else {
             this.setState({

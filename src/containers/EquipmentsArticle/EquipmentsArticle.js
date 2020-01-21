@@ -5,7 +5,6 @@ import DeleteButton from '../../components/UI/DeleteButton/DeleteButton';
 import AddButton from '../../components/UI/AddButton/AddButton';
 import AddEquipmentModal from '../../components/AddEquipmentModal/AddEquipmentModal'
 import EditEquipmentModal from '../../components/EditEquipmentModal/EditEquipmentModal'
-import CleanAll from '../../components/UI/CleanAll/CleanAll'
 import classes from './EquipmentsArticle.module.css'
 
 
@@ -107,7 +106,6 @@ showEditModal = (id, name, count) => {
                       roomId = {this.props.currentRoomId} 
                       showAddModal={this.showAddModal}
                     /> : null}
-                    {/* <CleanAll equipments={this.state.equipments}/> */}
                </div>
          )
     }
