@@ -29,7 +29,7 @@ class EditEquipmentModal extends React.Component{
         let equipmentName = this.state.equipmentName;
         if(equipmentName.trim() != ''){
             let equip = new Scorocode.Object("equipment");
-            equip.set("_id", this.state.id).set("name", this.state.name). set("count", +this.state.count);
+            equip.set("_id", this.state.id).set("name", this.state.equipmentName). set("count", +this.state.count);
             equip.save().then(() => {
                 console.info("done")
                 this.props.reloadEquipment()
